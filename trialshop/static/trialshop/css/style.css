@@ -30,6 +30,8 @@ p a{
 	float:left;
 }
 .header div a#logo img{
+	width:223px;
+	height: 113px;
 	border:0;
 }
 .header div div.navigation{

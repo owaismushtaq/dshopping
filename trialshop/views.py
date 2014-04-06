@@ -41,17 +41,12 @@ class DescView(generic.TemplateView):
                 cartchk=True
             else:
                 cartchk=False
-        return self.render_to_response({ 'Pmode_search' :  Pmode_search ,'cartchk':cartchk,'catagory_ob':catagory_ob,
+        return self.render_to_response({ 'Pmode_search' :  Pmode_search ,'cartchk':cartchk,'catagory_ob':catagory_ob,'quanti':quanti,
             })
 
 class CartView(generic.TemplateView):
     template_name = 'trialshop/viewbasket.html'
     def get(self,request,*args,**kwargs):
-        # form = quanti(request.POST)
-        # print form
-        # d=request.POST
-        # print d.keys()
-        # print qun
         cur_usr_cart=Cart.objects.filter(user=request.user)
         cart_prod=[]
         cart= Cart.objects.all()
@@ -70,8 +65,6 @@ class CartView(generic.TemplateView):
                     c.total_val=x*p
                     c.save()
 
-        #            product_det.append(product)
-                    
         user=request.user           
         total=0
         for c in cur_usr_cart:
@@ -88,7 +81,8 @@ def AddToCart(request,*args,**kwargs):
     x=kwargs['cart_id']
     chk_product=Product.objects.get(id=x)
     if chk_product:
-        p=Cart(user=request.user,product_id=chk_product)
+        x=request.POST['Qunty']
+        p=Cart(user=request.user,product_id=chk_product,quantity=x)
         p.save()
     return HttpResponseRedirect('/cartbasket')
     # productobj=Product.objects.all()
