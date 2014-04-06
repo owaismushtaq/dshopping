@@ -1,0 +1,13 @@
+:WSGIPythonPath /home/tmpuser/shop/lib/python2.7/site-packages
+<VirtualHost *:80>
+   DocumentRoot /srv/www/shopping-webapp
+    Alias /static  /srv/www/shopping-webapp/static
+   <Directory /srv/www/shopping-webapp>
+       Order allow,deny
+       Allow from all
+   </Directory>
+
+
+
+   WSGIScriptAlias / /srv/www/shopping-webapp/apache/django.wsgi
+</VirtualHost>

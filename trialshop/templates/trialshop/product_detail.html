@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<!-- Website template by freewebsitetemplates.com -->
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<title>Trial Shop</title>
+		{% load staticfiles %}
+
+	<link rel="stylesheet" href="{{ STATIC_URL }}trialshop/css/style.css" type="text/css" />
+	<link href="{{ STATIC_URL }}trialshop/css/style_dec.css" rel="stylesheet" type="text/css" media="all">
+	<script type="text/javascript" src="{{ STATIC_URL }}trialshop/js/jquery.min.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}trialshop/js/cloud-zoom.1.0.3.min.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}trialshop/js/jquery.fancybox-thumbs.js"></script>
+
+	</head>
+<body>
+		<div class="header">
+			<div>
+                <a href="" id="logo"><img src="{{ STATIC_URL }}trialshop/images/logo.gif" alt="logo"/></a>
+                <div class="navigation">
+                    <ul class="first">
+                        
+                    </ul>
+                    <ul>
+                    	<li><a href="#">Hi ! {{ user.username }}</a></li>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about/">About us</a></li>
+                        <li><a href="/cartbasket">My Cart</a></li>
+                        <li><a href="../../logout">Logout</a></li>
+                    </ul>
+                </div>
+                
+            </div>
+			<div id="navigation">
+				<ul>
+					<li class="selected"><a href="/">Home</a></li>
+				{% for i in catagory_ob|slice:"6" %}
+				
+					<li><a class="ateeb" href="/category/{{i.id}}/">{{i.product_catg}}</a></li>
+					
+				{% endfor%}	
+					
+				</ul>
+			</div>
+		</div> 
+		<div class="body">
+			
+			<div class="content">
+					<!-- start span1_of_1 -->
+			<div class="left_content">
+			<div class="span1_of_1">
+				<!-- start product_slider -->
+				<div class="product-view">
+				    <div class="product-essential">
+				        <div class="product-img-box">
+				    <div class="more-views" style="float: left; position: relative;">
+				     
+				    <a id="cs_up" href="# " style="position: absolute; z-index: 0; left: 20px; top: -14px; display: none;">&nbsp;</a>
+				    <a id="cs_down" href="#" style="position: absolute; z-index: 0; left: 20px; top: 397px;">&nbsp;</a></div>
+				    <div class="product-image"> 
+				        <div id="wrap" style="top: 0px; z-index: 100; position: relative; display: block;">
+				        <a class="cs-fancybox-thumbs cloud-zoom hoverZoomLink" rel="adjustX:30,adjustY:0,position:&#39;right&#39;,tint:&#39;#202020&#39;,tintOpacity:0.5,smoothMove:2,showTitle:true,titleOpacity:0.5" data-fancybox-group="thumb" href="{{ Pmode_search.product_pic.url }}" title="" alt="" style="position: relative; display: block;">
+				           	<img style='width:300px;' src="{{ Pmode_search.product_pic.url }}" alt="" title="" style="display: block;">
+				        </a><div class="mousetrap" style="width: 350px; height: 414px; top: 0px; left: 0px; position: absolute; z-index: 9999;"></div></div>
+				   </div>
+				
+				</div>
+				</div>
+				</div>
+				<!-- end product_slider -->
+			</div>
+			<!-- start span1_of_1 -->
+			<div class="span1_of_1_des">
+				  <div class="desc1">
+				  	<form action="/cart/{{Pmode_search.id}}/" method="post">{% csrf_token %}
+				  	<h3>{{Pmode_search.product_name}}</h3>
+					<h7>{{Pmode_search.product_brand}}</h7>
+					<p>{{Pmode_search.product_detail}}</p>
+					<p><select>
+  							<option value="volvo">Volvo</option>
+  							<option value="saab">Saab</option>
+  							<option value="opel">Opel</option>
+  							<option value="audi">Audi</option>
+						</select></p> 									
+					<h5>Rs. {{Pmode_search.product_price}} </h5>
+					
+					<div class="available">
+						
+						<div class="btn_form">
+							
+								<!-- <p><a href="/category/{{i.id}}/">{{i.product_catg}}</a></p> -->
+								<input type="submit" value="add to cart" title="">
+							</form>
+						</div>
+						
+						<div class="clear"></div>
+					</div>
+				
+			   	 </div>
+			   	</div>
+			   	<div class="clear"></div>
+			   	<!-- start tabs -->
+				   
+		         	<!-- end tabs -->
+        	</div>
+			</div>
+			<div class="article">
+				<div class="first">
+					<h3>Please Read</h3>
+					<p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+					<h4>Address</h4>
+					<p>18th Floor, Lorem ipsum dolor</br>
+					Adipiscing Bldg., Quesqui vestibulum Avenue</br>
+					Samar Loop St., Business Park</br>
+					Quisque vestibulum, 6029</br>
+					+32-819-4560</p>
+				</div>
+				<div>
+					<h3>Sed Elementum</h3>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vestibulum nibh eget justo dapibus eu porttitor purus hendrerit.</p>
+					<a href="#">Lorem ipsum dolor sit amet</a>
+					<a href="#">Consectetur adipiscing elituisque</a>
+				</div>
+				<div class="connect">
+					<h2>Follow us</h2>
+					<a href="https://www.facebook.com/owaismushtaq" id="facebook">Facebook</a>
+					<a href="https://twitter.com/owaismushtaq" id="twitter">Twitter</a>
+					
+					
+				</div>
+			</div>
+		</div>
+		<div class="footer">
+			<p>&#169; 2014 Trialshop. All Rights Reserved.</p>
+		</div>
+	</body>
+</html>

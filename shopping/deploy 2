@@ -1,0 +1,17 @@
+Searching 1505 files for "jt_dashboard"
+
+<untitled 114>:
+    1  WSGIPythonPath /home/tmpuser/shop/lib/python2.7/site-packages
+    2  <VirtualHost *:80>
+    3:    DocumentRoot /srv/www/jt_dashboard
+    4:     Alias /static  /srv/www/jt_dashboard/static
+    5:    <Directory /srv/www/jt_dashboard>
+    6         Order allow,deny
+    7         Allow from all
+    .
+   10  
+   11  
+   12:    WSGIScriptAlias / /srv/www/jt_dashboard/apache/django.wsgi
+   13  </VirtualHost>
+
+4 matches in 1 file

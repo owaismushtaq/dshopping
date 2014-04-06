@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!-- Website template by freewebsitetemplates.com -->
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<title>Trial Shop</title>
+		{% load staticfiles %}
+
+	<link rel="stylesheet" href="{{ STATIC_URL }}trialshop/css/style.css" type="text/css" />
+	<link href="{{ STATIC_URL }}trialshop/css/style_dec.css" rel="stylesheet" type="text/css" media="all">
+	<script type="text/javascript" src="{{ STATIC_URL }}trialshop/js/jquery.min.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}trialshop/js/cloud-zoom.1.0.3.min.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}trialshop/js/jquery.fancybox-thumbs.js"></script>
+
+	</head>
+<body>
+		<div class="header">
+			<div>
+				<a href="" id="logo"><img src="{{ STATIC_URL }}trialshop/images/logo.gif" alt="logo"/></a>
+				<div class="navigation">
+					<ul class="first">
+						
+					</ul>
+					<ul>
+						<li><a href="about.html">About us</a></li>
+						<li><a href="/signup">Sign Up</a></li>					
+						<li><a href="#">Login</a></li>
+					</ul>
+				</div>
+				<form action="" class="search">
+					<input type="text" value="search" onblur="this.value=!this.value?'search':this.value;" onfocus="this.select()" onclick="this.value='';"/>
+					<input type="submit" id="submit" value=""/>
+				</form>
+			</div>
+			<div id="navigation">
+				<ul>
+					<li class="selected"><a href="/">Home</a></li>
+					
+				</ul>
+			</div>
+		</div> 
+		<div class="body">
+			<form action="/signup_request/" method="post">{% csrf_token %}
+			<input type="submit" value="Sign Up" />
+
+			<div class="content">
+				{{ SignupForm }}
+			</div>
+<!-- <p>{{total}}</p> -->
+			<!-- start span1_of_1 -->
+			
+			 </form>  	
+			</div>
+	
+	</body>
+</html>

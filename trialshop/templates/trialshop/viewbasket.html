@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<!-- Website template by freewebsitetemplates.com -->
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title>Trial Shop</title>
+        {% load staticfiles %}
+
+    <link rel="stylesheet" href="{{ STATIC_URL }}trialshop/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link href='http://fonts.googleapis.com/css?family=Terminal+Dosis' rel='stylesheet' type='text/css'>
+    <link href="{{ STATIC_URL }}trialshop/css/cart_style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="{{ STATIC_URL }}trialshop/css/style_dec.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="stylesheet" href="{{ STATIC_URL }}trialshop/css/style.css" />
+
+    </head>
+
+<body>
+    <div class="header">
+            <div>
+                <a href="" id="logo"><img src="{{ STATIC_URL }}trialshop/images/logo.gif" alt="logo"/></a>
+                <div class="navigation">
+                    <ul class="first">
+                        
+                    </ul>
+                    <ul>
+                        <li><a href="#">Hi ! {{ user.username }}</a></li>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about/">About us</a></li>
+                        <li><a href="/cartbasket">My Cart</a></li>
+                        <li><a href="../../logout">Logout</a></li>
+                    </ul>
+                </div>
+                
+            </div>
+<div id="navigation">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    {% for i in catagory_ob|slice:"6" %}
+                        
+                        <li><a class="ateeb" href="/category/{{i.id}}/">{{i.product_catg}}</a></li>
+                                
+                    {% endfor%} 
+                </ul>
+            </div>
+        </div> 
+        <div class="body">
+            
+            <div class="content">
+                    <!-- start span1_of_1 -->
+            <div class="left_content">
+            <div class="span1_of_1">
+                <!-- start product_slider -->
+                <div class="product-view">
+                    <div class="product-essential">
+                        <div class="product-img-box">
+                    <div class="more-views" style="float: left; position: relative;">
+                     
+                    <a id="cs_up" href="# " style="position: absolute; z-index: 0; left: 20px; top: -14px; display: none;">&nbsp;</a>
+                    <a id="cs_down" href="#" style="position: absolute; z-index: 0; left: 20px; top: 397px;">&nbsp;</a></div>
+                    <div class="product-image"> 
+                        <div id="wrap" style="top: 0px; z-index: 100; position: relative; display: block;">
+                        <a class="cs-fancybox-thumbs cloud-zoom hoverZoomLink" rel="adjustX:30,adjustY:0,position:&#39;right&#39;,tint:&#39;#202020&#39;,tintOpacity:0.5,smoothMove:2,showTitle:true,titleOpacity:0.5" data-fancybox-group="thumb" href="{{ Pmode_search.product_pic.url }}" title="" alt="" style="position: relative; display: block;">
+                            <img style='width:300px;' src="{{ Pmode_search.product_pic.url }}" alt="" title="" style="display: block;">
+                        </a><div class="mousetrap" style="width: 350px; height: 414px; top: 0px; left: 0px; position: absolute; z-index: 9999;"></div></div>
+                   </div>
+                
+                </div>
+                </div>
+                </div>
+                <!-- end product_slider -->
+            </div>
+<article id="basket">
+<h1>Shopping Bag</h1>
+<table width="100" border="1">
+    <tr>
+        <th scope="col" class="description">Product</th>
+        <th scope="col" class="options">Details</th>
+        <th align="right" scope="col" class="price">Price</th>
+    </tr>
+{% for pro in cur_usr_cart %}
+                 <!-- <p>{{ request.user }}</p> -->
+        
+            
+            
+    <tr>
+        <td align="left" valign="top" class="description"><a href="#"><img src="{{pro.product_pic}}" alt="Elegant evening Dress" class="left" /></a><p><a class="ateeb" href="main.html">{{pro.product_type}}</a><br />{{pro.product_detail}}</p>
+        <a href="#"></a></td>
+        <td align="left" valign="top" class="options">
+        	<dl>
+                <!-- <dt>Product Id:</dt>
+                <dd>{{product.product_id}}</dd>
+                <dt>Name:</dt> -->
+                
+                        <!-- <dd>{{product.product_name}}</dd> -->
+                    
+                        <dt>Product Id:</dt>
+                        <dd>{{pro.pid}}</dd>
+                        <dt>Name:</dt>
+                        <dd>{{pro.product_id}}</dd>                                 
+                        <dt>Brand:</dt>
+                        <dd>{{pro.product_brand}}</dd>
+                        <dt>Catagory:</dt>
+                        <dd>{{pro.product_type}}</dd>
+                        <dt>Quantity:</dt>
+                        <form>
+                           
+                            <!-- <input type="select" value="{{pro.quantity}}" title="No of products" onchange="totalchange()"> -->
+                        </form>
+                             
+            </dl>
+            <form>                                <!-- <p><a href="/category/{{i.id}}/">{{i.product_catg}}</a></p> -->
+            <input type="submit" value="Remove" title="" formaction="/rmv/{{pro.id}}/">
+            </form>
+        </td>
+        <td align="right" valign="top" class="price">RS:{{pro.total_val}}</td>
+    </tr>
+
+ {% endfor %} 
+</table>
+<img src="/static/trialshop/images/creditcards.gif" class="safe" />
+<div class="right">
+    <strong>Subtotal before Delivery Charges</strong> <em>RS:{{total}}</em><br />
+   
+    
+</div>
+<button class="continue">Pay securely now</button>
+</article>
+
+</body>
+</html>
