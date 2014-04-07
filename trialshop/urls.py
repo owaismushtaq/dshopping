@@ -19,6 +19,8 @@ urlpatterns=patterns('',
 	url(r'^login_request/$',views.login_request,name="login"),
 	url(r'^signup_request/$',views.signup_request,name="signup"),
 	url(r'^about/$',views.about.as_view(),name="basket"),
+	url(r'^checkout_req/$',views.charge_payment.as_view(),name="payment"),
+	
 	
 	# url(r'^f/$',views.user_auth(),name="form"),
 

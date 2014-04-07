@@ -8,7 +8,7 @@ from django.core.urlresolvers import reverse
 from django.views import generic
 from django.template import RequestContext, loader
 from django.contrib.auth import authenticate, login,logout
-
+import stripe
 
 # Create your views here.
 class IndexView(generic.TemplateView):
@@ -67,14 +67,17 @@ class CartView(generic.TemplateView):
 
         user=request.user           
         total=0
+        leng=len(cur_usr_cart)
         for c in cur_usr_cart:
             total=total+c.total_val
         # cart_product_id=[]
         # for cart in cur_usr_cart:
             # cart_product_name=str(cart.product_id)
         catagory_ob=catagory.objects.all()
-        return self.render_to_response({'user':user,'cur_usr_cart':cur_usr_cart,'total':total,'catagory_ob':catagory_ob,
-        })            
+
+        return self.render_to_response({'user':user,'cur_usr_cart':cur_usr_cart,'total':total,'catagory_ob':catagory_ob,'leng':leng,
+        })
+
 
 def AddToCart(request,*args,**kwargs):
     # print kwargs
@@ -144,4 +147,61 @@ def signup_request(request):
     u=User(username=username,password=password,email=email)
     u.save()
     return HttpResponseRedirect('/login')
+
+# def charge_payment(request):
+#     cur_usr_cart=Cart.objects.filter(user=request.user)
+#     total1 =0
+#     for c in cur_usr_cart:
+#         total1=total1+c.total_val
+#     # Set your secret key: remember to change this to your live secret key in production
+#     # See your keys here https://manage.stripe.com/account
+#     print "helo owais 1"
+#     stripe.api_key = "sk_test_NhO6U7lMQIvidV5EDdgKObPT"
+
+#     # Get the credit card details submitted by the form
+#     token = request.POST['stripeToken']
+#     # Create the charge on Stripe's servers - this will charge the user's card
+#     try:
+#      charge = stripe.Charge.create(
+#         amount=total1, # amount in cents, again
+#         currency="usd",
+#         card=token,
+#         description="payinguser@example.com"
+#     )
+#     except stripe.CardError, e:
+#     # The card has been declined
+#         pass
+
+#     print "helo owais 4"
+#     return HttpResponseRedirect('/')     
+    
+class charge_payment(generic.TemplateView):
+    template_name = 'trialshop/about.html'
+    def get(self,request,*args,**kwargs):
+        cur_usr_cart=Cart.objects.filter(user=request.user)
+        total1 =0
+        for c in cur_usr_cart:
+            total1=total1+c.total_val
+        # Set your secret key: remember to change this to your live secret key in production
+        # See your keys here https://manage.stripe.com/account
+        print "helo owais 1"
+        stripe.api_key = "sk_test_NhO6U7lMQIvidV5EDdgKObPT"
+
+        # Get the credit card details submitted by the form
+        token = request.POST['stripeToken']
+        # Create the charge on Stripe's servers - this will charge the user's card
+        try:
+         charge = stripe.Charge.create(
+            amount=total1, # amount in cents, again
+            currency="usd",
+            card=token,
+            description="payinguser@example.com"
+        )
+        except stripe.CardError, e:
+        # The card has been declined
+            pass
+
+        print "helo owais 4"
+        return self.render_to_response({'user':user,'cur_usr_cart':cur_usr_cart,'total':total,'catagory_ob':catagory_ob,'leng':leng,
+        })
 

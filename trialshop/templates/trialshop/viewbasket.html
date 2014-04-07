@@ -103,6 +103,9 @@
                         <dt>Catagory:</dt>
                         <dd>{{pro.product_type}}</dd>
                         <dt>Quantity:</dt>
+                        <dd>{{pro.quantity}}</dd>                        
+                        <dt>Price:</dt>
+                        <dd>{{pro.price}}</dd>
                         <form>
                            
                             <!-- <input type="select" value="{{pro.quantity}}" title="No of products" onchange="totalchange()"> -->
@@ -121,10 +124,32 @@
 <img src="/static/trialshop/images/creditcards.gif" class="safe" />
 <div class="right">
     <strong>Subtotal before Delivery Charges</strong> <em>RS:{{total}}</em><br />
-   
-    
+    {% comment %}
+    <!-- <form action="/index" method="POST">{% csrf_token %}
+                
+                <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                    data-key="pk_test_YpmMKIiaE0IBWKDovnxLaBKX"
+                    data-amount= {{ total }}
+                    data-name="Applied"
+                    data-description= '{{ leng }} Product Rs {{ total }}'
+                    data-image="{{ STATIC_URL }}trialshop/images/marketplace.png">
+                </script>
+    </form> -->
+    {% endcomment %}
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+    <input type="hidden" name="cmd" value="_xclick">
+    <input type="hidden" name="business" value="owaismushtaq-facilitator@gmail.com">
+    {% for c in catagory_ob %}
+    <input type="hidden" name="item_name" value="{{ c.product_name}}">    
+    {% endfor %}
+    <input type="hidden" name="currency_code" value="USD">
+    <input type="hidden" name="amount" value="{{total}}">
+    <input style="margin-left: 542px;margin-top: 20px;width: 62px;" type="image" src="http://www.paypal.com/en_US/i/btn/x-click-but01.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+
+</form>
+
 </div>
-<button class="continue">Pay securely now</button>
+                
 </article>
 
 </body>
